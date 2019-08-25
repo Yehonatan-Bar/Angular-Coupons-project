@@ -1,0 +1,138 @@
+<div *ngIf="button">
+        <h1> Please click here to start</h1>
+        <button (click)="start()">Start</button>
+    </div>
+    <div *ngIf="startCompany">
+        <h1>hello {{company.compName}}</h1>
+    
+        <button (click)="showDetailes = !showDetailes">show my details</button>
+        <button (click)="showCompanyCoupons()">show my coupons</button>
+        <button (click)="showCreateCoupon = !showCreateCoupon">Creat Coupon</button>
+        <button (click)="CreatUser()">Creat User</button>
+        <!-- <button (click)="showCompanyPurchases()">Show all purchases</button> -->
+        <br>
+    </div>
+    
+    <!-- <div *ngIf = "showAdmin" > 
+    
+        <h1>your admin details are:</h1>
+        <input type="text" placeholder={{adminInstance.admin.userEmail}} [(ngModel)]="adminInstance.admin.userEmail"/>
+        <input type="text" placeholder={{adminInstance.admin.password}} [(ngModel)]="adminInstance.admin.password"/>
+        <input type="text" placeholder={{adminInstance.admin.type}} [(ngModel)]="adminInstance.admin.type"/>
+    
+        <button (click)="crearteAdmin()">creat Administrator</button>
+    </div> -->
+    
+    <div *ngIf="isShowCreateUser">
+        <input type="text" placeholder="User userEmail" name="userEmail" [(ngModel)]="userEmail" />
+        <input type="text" placeholder="User password" name="password" [(ngModel)]="password" />
+        <button (click)="CompanyUserRegister()">submit</button>
+    
+    </div>
+    <div *ngIf="showDetailes">
+    
+        <h1>your details are:</h1>
+        <input type="text" placeholder={{company.compName}} [(ngModel)]="company.compName" />
+        <input type="text" placeholder={{company.contactEmail}} [(ngModel)]="company.contactEmail" />
+        <input type="text" placeholder={{company.contactPhone}} [(ngModel)]="company.contactPhone" />
+    
+        <button (click)="update()">Update</button>
+    
+        <!-- <p> {{company.compName}} </p> -->
+        <div *ngIf="isUpdateSucceeded">
+            <p>Update succeed!</p>
+        </div>
+    </div>
+    
+    <div *ngIf="showCompanysCoupons">
+    
+        <h1>your coupons are:</h1>
+    
+        <div *ngFor="let coupon of couponInstance.compnays_coupons">
+            <br> couponID: {{coupon.couponID}}
+            <br> company ID: {{coupon.companyID}}
+            <br> category: {{coupon.category}}
+            <div *ngIf=isEditCoupon>
+                <input type="text" placeholder=" {{coupon.category}}" [(ngModel)]="coupon.category" />
+            </div>
+            <br> title: {{coupon.title}}
+            <div *ngIf=isEditCoupon>
+                <input type="text" [(ngModel)]="coupon.title" />
+            </div>
+            <br> description: {{coupon.description}}
+            <div *ngIf=isEditCoupon>
+                <input type="text" placeholder=" {{coupon.description}}" [(ngModel)]="coupon.description" />
+            </div>
+            <br> amount: {{coupon.amount}}
+            <div *ngIf=isEditCoupon>
+                <input type="text" placeholder=" {{coupon.amount}}" [(ngModel)]="coupon.amount" />
+            </div>
+            <br> price: {{coupon.price}}
+            <div *ngIf=isEditCoupon>
+                <input type="text" placeholder=" {{coupon.price}}" [(ngModel)]="coupon.price" />
+            </div>
+            <br> Expiry Date: {{coupon.endDate}}
+            <div *ngIf=i sEditCoupon>
+                <input type=date placeholder=" {{coupon.endDate}}" [(ngModel)]="coupon.endDate" />
+            </div>
+            <br> image: {{coupon.image}}
+            <div *ngIf=isEditCoupon>
+                <input type="text" placeholder=" {{coupon.image}}" [(ngModel)]="coupon.image" />
+            </div>
+            <br>
+            <button (click)="isEditCoupon=!isEditCoupon">Edit Coupon</button>
+    
+            <div *ngIf=isEditCoupon>
+                <button (click)="ConfirmEditCoupon(coupon.couponID,coupon.companyID, coupon.title,coupon.custPhone,
+                coupon.startDate,coupon.endDate,coupon.amount,coupon.category,coupon.description,
+                coupon.price,coupon.image)">Confirm</button>
+            </div>
+            <button (click)="deleteCoupons(coupon.couponID)">Delete Coupon</button>
+        </div>
+    </div>
+    
+    <form class="create" *ngIf="showCreateCoupon" style="color: rgb(71, 11, 11)">
+        <h3>Enter coupon's details:</h3>
+        <br> category
+        <br>
+        <select name="category" [(ngModel)]="coupon.category" placeholder="gg">
+            <option *ngFor="let c of categories">{{c}}</option>
+        </select>
+        <br>
+        <input type="text" placeholder="title" name="title" [(ngModel)]="coupon.title" />
+    
+        <br> Start date
+        <br>
+        <input type="date" placeholder="Start date" name=startDate [(ngModel)]="coupon.startDate" />
+        <br> End date
+        <br>
+        <input type="date" placeholder="End date" name=endDate [(ngModel)]="coupon.endDate" />
+        <br>
+        <input type="text" placeholder="amount" name=amount [(ngModel)]="coupon.amount" />
+        <br>
+        <input type="text" placeholder="Description" name=description [(ngModel)]="coupon.description" />
+        <br>
+        <input type="text" placeholder="Price" name=price [(ngModel)]="coupon.price" />
+        <br>
+        <input type="text" placeholder="Image link" name=image [(ngModel)]="coupon.image" />
+    
+        <button (click)="createCoupon()">Create!</button>
+    </form>
+    
+    <!--
+    <div *ngIf = "isShowPurchases" >
+        <h1>your purchases are:</h1>
+    
+        <div *ngFor="let purchase of  companyPurchaseInstance.companyPurchases">
+            <br>
+                purchaseID: {{purchase.purchaseID}};
+             <br>
+            customerID: {{purchase.customerID}};
+            <br>
+            couponID: {{purchase.couponID}};
+            <br>
+            amount: {{purchase.amount}};
+    
+        </div>
+    
+       <div>{{coupon.title}}</div> -->

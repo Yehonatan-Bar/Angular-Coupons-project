@@ -1,0 +1,152 @@
+<h1>Lo! the great Administrator is here! </h1>
+<h2> what is your command o mighty Administrator?</h2>
+
+<!-- <button (click)="isShowDeleteCompany = !isShowDeleteCompany">Delete company</button> -->
+<button (click)="ShowCreateCoupon()">Creat Coupon</button>
+<button (click)="getAllCompanies()">thou shall show all the companies</button>
+<button (click)="ShowAllCustomer()">show all customers</button>
+<button (click)="ShowAllUsers()">show all users</button>
+<button (click)="isCreateCompany = !isCreateCompany">thou shall create company</button>
+<button (click)="ShowAddPurchase()">add Purchase</button>
+<button (click)="getAllPurchases()">Show all purchases</button>
+
+
+
+<div *ngIf = "isCreateCompany" > 
+  <input type="text" placeholder="company name" [(ngModel)]="company.compName"/>
+  <input type="text" placeholder="contact email" [(ngModel)]="company.contactEmail"/>
+  <input type="text" placeholder="contact phone" [(ngModel)]="company.contactPhone"/>
+  <button (click)="createCompany()">Let there be COMPANY</button>
+</div>
+
+
+<div *ngIf = "isShowDeleteCompany">
+
+    <input type="text" placeholder="Comapny Id" [(ngModel)]="companyId"/>
+    <button (click)="deleteCompany()">Delete</button>
+    <br>
+    {{companyId}}
+    
+</div>
+
+
+
+
+<div *ngIf = "isShowAllCompanies" > 
+  <h1>The companies are:</h1>
+  <div *ngFor="let company of companyInstance.allCompanies">
+    <h2>company id: {{company.companyID}} </h2>
+    <br>
+    company name: {{company.compName}}
+    <br>
+    company contact email: {{company.contactEmail}}
+    <br>
+    company contact phone: {{company.contactPhone}}
+    <br>
+    
+    
+    <button (click)="deleteCompany(company.companyID)">Delete Company</button> 
+    <button (click)="getAllCompanysUsers(company.companyID)">Get All Company's Users</button> 
+    
+    <div *ngIf = "isShowAllCompanysUsers" > 
+      <h3>Company's Users:</h3>
+      <div *ngFor="let user of companyInstance.companysUsers">
+        <br>
+        user ID: {{user.userID}}
+        <br>
+        user email: {{user.userEmail}}
+        <br>
+        user password: {{user.password}}
+        <br>
+        company ID: {{user.companyID}}
+        <br>
+        <button (click)="deleteUser(user.userID)">Delete User</button> 
+        
+        
+      }
+      
+    </div>
+    *************************************************************************
+  </div>
+
+</div>
+</div>
+
+<div *ngIf = "isShowCreateCoupon" > 
+  
+  <h3>Enter coupon's details:</h3>
+  <input type="text" placeholder="CompanyID" [(ngModel)]="newCoupon.companyID"/>
+      <input type="text" placeholder="Title" [(ngModel)]="newCoupon.title"/>
+         <input type="date" placeholder="Start date" [(ngModel)]="newCoupon.startDate"/>
+  <input type="date" placeholder="End date" [(ngModel)]="newCoupon.endDate"/>
+  <input type="text" placeholder="amount" [(ngModel)]="newCoupon.amount"/>
+  <input type="text" placeholder="Category" [(ngModel)]="newCoupon.category"/>
+  <input type="text" placeholder="Description" [(ngModel)]="newCoupon.description"/>
+  <input type="text" placeholder="Price" [(ngModel)]="newCoupon.price"/>
+  <input type="text" placeholder="Image link" [(ngModel)]="newCoupon.image"/>
+
+  <button (click)="createCoupon()">Create!</button>
+  
+  
+</div>
+
+<div *ngIf = "isShowAllCustomer" > 
+    <h3>all customer:</h3>
+    <div *ngFor="let customer of customerInstance.all_customers ">
+        <!-- customers -->
+      <br>
+      customer email: {{customer.custEmail}}
+      <br>
+      customer phone: {{customer.custPhone}}
+      <br>
+      customer name: {{customer.custName}}
+      <br>
+
+  </div>
+  </div>
+
+
+
+  <div *ngIf = "isShowAllUsers" > 
+      <h3>all users:</h3>
+      <div *ngFor="let user of users">
+        <br>
+        user email: {{user.userEmail}}
+        <br>
+        user password: {{user.password}}
+        <br>
+        user type: {{user.type}}
+        <br>
+    </div>
+    </div>
+
+    <div *ngIf = "isAddPurchase" > 
+        <h3>Enter purchase's details:</h3>
+      <input type="text" placeholder="amount" [(ngModel)]="purchaseAmount"/>
+      <input type="text" placeholder="CouponID" [(ngModel)]="purchaseCouponID"/>
+      <input type="text" placeholder="CustomerID" [(ngModel)]="purchaseCustomerID"/>
+    
+      <button (click)="addPurchase()">Create!</button>
+      
+      
+    </div>
+
+    <div *ngIf = "isShowPurchases" > 
+  
+      <h3>All purchases:</h3>
+      <div *ngFor="let purchase of purchases">
+        <br>
+
+        purchase id: {{purchase.purchaseID}}
+        <br>
+        purchase customerId: {{purchase.customerID}}
+        <br>
+        purchase coupinId: {{purchase.couponID}}
+        <br>
+        purchase amount: {{purchase.amount}}
+        <br>
+    </div>
+      
+    </div>
+
+<!-- company.compName,company.contactEmail,company.contactPhone -->

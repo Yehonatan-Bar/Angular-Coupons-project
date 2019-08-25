@@ -1,0 +1,164 @@
+<div *ngIf="button">
+        <h1> Dear customer, please click here to start</h1>
+        <button (click)="start()">Start</button>
+    
+    </div>
+    <div *ngIf="startCustomer">
+        <p>Hello {{customer.custName}}, welcome to our coupons system</p>
+        <h2>Q Elen síla lúmenn' omentielvo </h2>
+        <h2>  (A star shines on the hour of our meeting)</h2>
+        <h1>  what would you like to do?</h1>
+        <button (click)="showDetailes = !showDetailes">show my details</button>
+        <button (click)="getMyCoupns()">show my coupons</button>
+        <button (click)="getAllCoupns()">show all coupons</button>
+        <br>
+    
+        <!-- <form class="login-form"> -->
+        <!-- <input type="text" placeholder="הכנס את השם שלך" [(ngModel)]="instanceUser.user.userEmail"/> -->
+        <!-- <h1>{{user_name}}</h1> -->
+        <!-- <h1></h1> -->
+        <!-- <input type="password" placeholder="הכנס את הססמא שלך" [(ngModel)]="instanceUser.user.password"/> -->
+        <!-- <h1></h1> -->
+    
+        <!-- <button (click)="createUser()">אישור</button> -->
+        <!-- </form> -->
+    
+        <!-- <button (click)="getCustomer()">getCustomer()</button>
+                    <button (click)="showCustomer()">showCustomer()</button> -->
+    
+        <div *ngIf="showDetailes">
+    
+            <h1>your details are:</h1>
+            <div id="c2">
+            <p>Phone: 
+            <input type="text" placeholder="{{customer.custPhone}}" [(ngModel)]="customer.custPhone" />
+            </p>
+            <p>password:
+            <input type="text" placeholder="{{customer.user.password}}" [(ngModel)]="customer.user.password" />
+        </p>
+        <p>Email:
+            <input type="text" placeholder="{{customer.custEmail}}" [(ngModel)]="customer.custEmail" />
+        </p>
+            <input type="text" disabled="dis" placeholder="Name: {{customer.custName}}" />
+            <br>
+            <button (click)="update()">Update</button>
+        </div>
+        </div>
+    
+        <div *ngIf="showMyCoupns">
+            <h1>your coupons are:</h1>
+            <label *ngFor="let coupon of couponInstance.all_coupons">
+                <table>
+                    <tr>
+                        <th>
+                            company id
+                        </th>
+                        <td> {{coupon.companyID}}
+                        </td>
+                    </tr>
+                    <th>
+                        category
+                    </th>
+                    <td> {{coupon.category}}
+    
+                    </td>
+                    <tr>
+                        <th>
+                            title
+                        </th>
+                        <td>
+                            {{coupon.title}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            description
+                        </th>
+                        <td>
+                            {{coupon.description}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            amount
+                        </th>
+                        <td>
+                            {{coupon.amount}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>price</th>
+                        <td>{{coupon.price}}</td>
+                    </tr>
+                    <tr>
+                       <th>Expiry Date</th>
+                         <td>{{coupon.endDate}}</td>
+                    </tr>
+                    <tr>
+                       <th>
+                        image
+                    </th> 
+                    <td>
+                         {{coupon.image}}
+                        </td>
+                    </tr>
+                    <br>
+                    <br>
+                    <p>**************************</p>
+                    <br>
+                    <br>
+    
+                </table>
+            </label>
+        </div>
+        <br>
+        <div *ngIf="isMakePurchase">
+            <p> Roll down to add amount and confirm</p>
+        </div>
+        <div class="c2" *ngIf="showAllCoupons">
+            <h1>The coupons you can purchase:</h1>
+            <label *ngFor="let coupon of couponInstance.all_purchusable_coupons">
+                <table>
+                    <tr>
+                        <th> category</th>
+                        <td> {{coupon.category}}</td>
+                    </tr>
+                    <tr>
+                        <th> title </th>
+                        <td> {{coupon.title}}</td>
+                    </tr>
+                    <tr>
+                        <th> description </th>
+                        <td> {{coupon.description}}</td>
+                    </tr>
+                    <tr>
+                        <th> amount </th>
+                        <td> {{coupon.amount}}</td>
+                    </tr>
+                    <tr>
+                        <th> price </th>
+                        <td>{{coupon.price}} </td>
+                    </tr>
+                    <tr>
+                        <th>Expiry Date</th>
+                        <td>{{coupon.endDate}}</td>
+                    </tr>
+                    <tr>
+                        <th> image</th>
+                        <td>{{coupon.image}}</td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+                <button (click)="doMakePurchase(coupon)">Purchase this one</button>
+            </label>
+    
+            <div *ngIf="isMakePurchase">
+                <h2>Amount:</h2>
+                <input type="text" placeholder="Insert Amount" [(ngModel)]="amount" />
+            </div>
+            <div *ngIf="isMakePurchase">
+                <button (click)="addPurchase(chosenCoupon.couponID)">Buy now!!</button>
+            </div>
+        </div>
+    </div>
